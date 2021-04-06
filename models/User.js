@@ -1,8 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const { DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_PORT, DB_NAME } = process.env;
+const { DB_USERNAME, DB_PASSWORD, DB_PORT, DB_HOSTNAME,  DB_NAME } = process.env; 
 const sequelize = new Sequelize(
-  // `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_NAME}`
-  'postgres://postgres:dsvgh6083..@localhost:5432/clarusway2'
+  `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_NAME}`
 );
 sequelize
   .authenticate()
