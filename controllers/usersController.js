@@ -10,14 +10,14 @@ exports.get_users = async (req, res, next) => {
   };
 
   exports.show_add_user_form = (req, res) => {
-    res.render("addUser");
+    res.render("addUser", {user: undefined});
   }
 
   exports.add_user =  async (req, res) => {
     try{
      const newUser = await UserModel.create({
-       firstName: req.firstName,
-       lastName: req.lastName
+       firstName: req.body.firstName,
+       lastName: req.body.lastName
      })
      res.redirect("/users")
     } catch (err) {
@@ -34,5 +34,29 @@ exports.get_users = async (req, res, next) => {
       res.redirect("/users")
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  exports.show_edit_user = async (req, res) => {
+    try{
+      const user = await UserModel.findOne({
+        where: { id : req.params.id}
+      })
+      res.render("addUser", {user})
+    } catch(err) {
+      res.send("An error occured...")
+    }
+  };
+
+  exports.edit_user = async (req, res) => {
+    try{
+      await UserModel.update({
+        firstName : req.body.firstName,
+        lastName : req.body.lastName},
+        {returning: true, where: {id: req.params.id},
+      })
+      res.redirect('/users');
+    } catch(error) {
+      res.send("An error occured!!!")
     }
   }

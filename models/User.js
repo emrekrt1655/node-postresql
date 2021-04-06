@@ -1,7 +1,8 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const { DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_PORT, DB_NAME } = process.env;
 const sequelize = new Sequelize(
-  `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_NAME}`
+  // `postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_NAME}`
+  'postgres://postgres:dsvgh6083..@localhost:5432/clarusway2'
 );
 sequelize
   .authenticate()
@@ -10,10 +11,12 @@ sequelize
 
  const UserModel = sequelize.define("recruiter", {
       firstName: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+          allowNull:false
       },
       lastName: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+          allowNull:false
       }
   },
   {
