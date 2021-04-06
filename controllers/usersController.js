@@ -50,7 +50,7 @@ exports.get_users = async (req, res, next) => {
 
   exports.edit_user = async (req, res) => {
     try{
-      await UserModel.update({
+      const updatedUser = await UserModel.update({
         firstName : req.body.firstName,
         lastName : req.body.lastName},
         {returning: true, where: {id: req.params.id},
